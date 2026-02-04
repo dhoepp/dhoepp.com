@@ -59,8 +59,16 @@ import Copyright from "../components/copyright.astro";
       scroll-snap-align: start;
     }
 
-    h1,
-    h2,
+    h1 {
+      font-weight: 300;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    h2 {
+      font-weight: 300;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+    }
+
     h3,
     h4,
     h5,
@@ -84,6 +92,7 @@ import Copyright from "../components/copyright.astro";
       z-index: -1;
       filter: blur(100px);
       will-change: transform;
+      object-fit: cover;
     }
 
     .blob-green {
