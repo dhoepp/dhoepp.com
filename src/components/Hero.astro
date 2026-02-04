@@ -1,14 +1,50 @@
 <section id="hero" class="hero">
   <h1>Dustin Hoeppner</h1>
-  <h2>Full Stack Developer</h2>
+  <h2>full stack developer</h2>
 </section>
 
-<style>
+<style is:global>
   .hero {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .hero h1 {
+    /* margin: 0; */
+    opacity: 0;
+    animation: fade-in 1s ease forwards;
+  }
+
+  .hero h2 {
+    margin: 0;
+    font-family: Menlo, Consolas, "Liberation Mono", monospace;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    border-right: 2px solid white;
+    animation:
+      typing 1.5s steps(20) 1s forwards,
+      blink 0.7s step-end infinite 1s;
+  }
+
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes typing {
+    to {
+      width: 20ch;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      border-color: transparent;
+    }
   }
 </style>
