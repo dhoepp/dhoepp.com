@@ -1,23 +1,121 @@
+---
+import blobGreen from "../assets/blob-green.svg";
+import blobTeal from "../assets/blob-teal.svg";
+import Copyright from "../components/copyright.astro";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Dustin Hoeppner Dev</title>
+  </head>
+  <!-- <nav>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav> -->
+  <body>
+    <img
+      class="blob blob-green"
+      src={blobGreen.src}
+      alt=""
+      fetchpriority="high"
+    />
+    <img
+      class="blob blob-teal"
+      src={blobTeal.src}
+      alt=""
+      fetchpriority="high"
+    />
+    <slot />
+    <Copyright />
+  </body>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+  <style is:global>
+    html {
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      background-color: #2a3030;
+      color: #fff;
+    }
+
+    section {
+      scroll-snap-align: start;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 300;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .blob {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      filter: blur(100px);
+      will-change: transform;
+    }
+
+    .blob-green {
+      bottom: 0;
+      left: -25%;
+      animation: drift-green 90s ease-in-out infinite;
+    }
+
+    .blob-teal {
+      top: 0;
+      right: -25%;
+      animation: drift-teal 85s ease-in-out infinite; /* offset slightly for asymmetrical look */
+    }
+
+    @keyframes drift-green {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(75%);
+      }
+    }
+
+    @keyframes drift-teal {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(-75%);
+      }
+    }
+  </style>
+</html>

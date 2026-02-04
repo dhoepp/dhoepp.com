@@ -1,0 +1,76 @@
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <form
+    action="https://formspree.io/f/xjgondwn"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <label>
+      Your Name:
+      <input name="Name" />
+    </label>
+    <label>
+      Your email:
+      <input type="email" name="email" />
+    </label>
+    <label>
+      Your Phone Number:
+      <input type="tel" name="number" />
+    </label>
+    <label>
+      Your message:
+      <textarea name="message"></textarea>
+    </label>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<style>
+  .contact {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+  }
+  section {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #555;
+  }
+
+  textarea {
+    height: 4rem;
+  }
+</style>
