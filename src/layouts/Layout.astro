@@ -34,25 +34,32 @@ import Copyright from "../components/copyright.astro";
       alt=""
       fetchpriority="high"
     />
-    <slot />
-    <Copyright />
+    <div class="snap-container">
+      <slot />
+      <Copyright />
+    </div>
   </body>
 
   <style is:global>
-    html {
-      scroll-behavior: smooth;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
+    html,
+    body {
+      margin: 0;
+      height: 100%;
     }
 
     body {
-      margin: 0;
       width: 100%;
-      height: 100%;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 300;
       background-color: #222626;
       color: #fff;
+    }
+
+    .snap-container {
+      height: 100vh;
+      height: 100dvh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
     }
 
     section {
@@ -87,6 +94,8 @@ import Copyright from "../components/copyright.astro";
 
     .blob {
       position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
@@ -96,14 +105,13 @@ import Copyright from "../components/copyright.astro";
     }
 
     .blob-green {
-      bottom: 0;
       left: -25%;
       animation: drift-green 90s ease-in-out infinite;
     }
 
     .blob-teal {
-      top: 0;
       right: -25%;
+      left: auto;
       animation: drift-teal 85s ease-in-out infinite; /* offset slightly for asymmetrical look */
     }
 
