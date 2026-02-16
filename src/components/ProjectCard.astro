@@ -79,4 +79,12 @@ const { title, description, tech, github, demo } = Astro.props;
     background: rgba(100, 220, 200, 0.08);
     text-decoration: none;
   }
+
+  @media (max-width: 768px) {
+    .project-card {
+      flex: 1;
+      min-width: unset;
+      max-width: unset;
+    }
+  }
 </style>

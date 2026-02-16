@@ -21,5 +21,7 @@ export const projects: Project[] = [
         github: "https://github.com/dhoepp/dhoepp.com",
         //demo: "https://dhoepp.com"
     },
+    
+    
   // add more projects
 ];
