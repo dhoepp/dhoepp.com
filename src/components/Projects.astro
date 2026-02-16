@@ -1,13 +1,41 @@
 ---
 import { projects } from "../data/projects";
 import ProjectCard from "../components/ProjectCard.astro";
+
+// Only use carousel if more than 2 projects (won't fit in one mobile screen)
+const needsCarousel = projects.length > 2;
+
+const pages: (typeof projects)[] = [];
+if (needsCarousel) {
+  for (let i = 0; i < projects.length; i += 2) {
+    pages.push(projects.slice(i, i + 2));
+  }
+}
 ---
 
 <section id="projects" class="projects">
   <h2>Projects</h2>
-  <div class="projects-grid">
+
+  {/* Desktop: flat grid (also used on mobile when <= 2 projects) */}
+  <div class={`projects-grid desktop-grid ${needsCarousel ? "has-carousel" : ""}`}>
     {projects.map((project) => <ProjectCard {...project} />)}
   </div>
+
+  {/* Mobile: grouped into swipeable pages of 2 */}
+  {needsCarousel && (
+    <div class="projects-grid mobile-carousel">
+      {pages.map((page) => (
+        <div class="carousel-page">
+          {page.map((project) => <ProjectCard {...project} />)}
+        </div>
+      ))}
+    </div>
+  )}
+  {needsCarousel && (
+    <div class="scroll-dots">
+      {pages.map(() => <span class="dot" />)}
+    </div>
+  )}
 </section>
 
 <style>
@@ -23,12 +51,73 @@ import ProjectCard from "../components/ProjectCard.astro";
     overflow-y: auto;
   }
 
-  .projects-grid {
+  /* Desktop grid */
+  .desktop-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
     padding: 1rem;
     max-width: 1200px;
+  }
+
+  /* Mobile carousel - hidden on desktop */
+  .mobile-carousel {
+    display: none;
+  }
+
+  .scroll-dots {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .projects {
+      overflow: hidden;
+    }
+
+    /* Hide desktop grid on mobile only when carousel exists */
+    .desktop-grid.has-carousel {
+      display: none;
+    }
+
+    /* Show mobile carousel */
+    .mobile-carousel {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 7.5vw;
+      padding: 1rem 7.5vw;
+      max-width: 100%;
+      gap: 1rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .mobile-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-page {
+      flex: 0 0 85vw;
+      scroll-snap-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .scroll-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(100, 220, 200, 0.3);
+    }
   }
 </style>
