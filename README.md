@@ -1,46 +1,57 @@
-# Astro Starter Kit: Basics
+# dhoepp.com
+
+Personal developer portfolio built with [Astro](https://astro.build), showcasing a transition from 13 years of IT infrastructure experience into software development.
+
+**Live:** [dhoepp.com](https://dhoepp.com)
+
+## Background Animation
+
+The site features a procedurally generated background using two SVG blob shapes animated with CSS keyframes at offset intervals (90s and 85s). The asymmetrical timing creates a non-repeating visual pattern that cycles over ~25 minutes before looping. The entire animation runs on two SVGs (888 bytes + 716 bytes), a CSS blur filter, and keyframe transforms — no JavaScript, no canvas, no external libraries.
+
+## Tech Stack
+
+- **Framework:** Astro 5
+- **Language:** TypeScript
+- **Styling:** Scoped CSS with backdrop blur and layered box-shadow for a 2.5D card effect
+- **Deployment:** Vercel with custom domain
+
+## Project Structure
+
+```
+src/
+├── assets/          # SVG blob backgrounds
+├── components/      # Astro components (Hero, About, Projects, Contact)
+├── data/            # Project data (TypeScript)
+├── layouts/         # Base layout with global styles and scroll-snap
+└── pages/           # Route pages
+```
+
+## Getting Started
 
 ```sh
-npm create astro@latest -- --template basics
+# Clone the repository
+git clone https://github.com/dhoepp/dhoepp.com.git
+cd dhoepp.com
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The dev server runs at `localhost:4321`.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command             | Action                                       |
+| :------------------ | :------------------------------------------- |
+| `npm install`       | Install dependencies                         |
+| `npm run dev`       | Start local dev server at `localhost:4321`    |
+| `npm run build`     | Build production site to `./dist/`           |
+| `npm run preview`   | Preview the production build locally         |
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Featured Projects
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Math Learning App** — FastAPI education application with TypeScript frontend ([repo](https://github.com/dhoepp/math-practice-app) | [demo](https://math-practice-app-eta.vercel.app/))
+- **Developer Portfolio** — This site. Sub-1KB procedural background animation with a 25-minute loop cycle ([repo](https://github.com/dhoepp/dhoepp.com))
