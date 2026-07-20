@@ -2,6 +2,19 @@
 import blobGreen from "../assets/blob-green.svg";
 import blobTeal from "../assets/blob-teal.svg";
 import Copyright from "../components/copyright.astro";
+import Nav from "../components/Nav.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  snap?: boolean;
+}
+
+const {
+  title = "Dustin Hoeppner Dev",
+  description = "IT professional transitioning to software development. Portfolio featuring procedural CSS animations and full-stack projects.",
+  snap = true,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -12,17 +25,11 @@ import Copyright from "../components/copyright.astro";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>Dustin Hoeppner Dev</title>
+    <title>{title}</title>
 
     <!-- Open Graph / Social Media Preview -->
-    <meta
-      property="og:title"
-      content="Dustin Hoeppner - Full Stack Developer"
-    />
-    <meta
-      property="og:description"
-      content="IT professional transitioning to software development. Portfolio featuring procedural CSS animations and full-stack projects."
-    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content="https://dhoepp.com/og-image.png" />
     <meta property="og:url" content="https://dhoepp.com" />
     <meta property="og:type" content="website" />
@@ -31,14 +38,8 @@ import Copyright from "../components/copyright.astro";
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://dhoepp.com/og-image.png" />
   </head>
-  <!-- <nav>
-    <ul>
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav> -->
   <body>
+    <Nav />
     <img
       class="blob blob-green"
       src={blobGreen.src}
@@ -51,7 +52,7 @@ import Copyright from "../components/copyright.astro";
       alt=""
       fetchpriority="high"
     />
-    <div class="snap-container">
+    <div class:list={[snap ? "snap-container" : "page-container"]}>
       <slot />
       <Copyright />
     </div>
@@ -77,6 +78,10 @@ import Copyright from "../components/copyright.astro";
       height: 100dvh;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
+    }
+
+    .page-container {
+      min-height: 100dvh;
     }
 
     section {

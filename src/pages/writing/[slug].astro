@@ -1,0 +1,122 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("writing", ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true,
+  );
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout
+  title={`${post.data.title} — Dustin Hoeppner`}
+  description={post.data.description}
+  snap={false}
+>
+  <article class="post">
+    <header class="post-header">
+      <h1>{post.data.title}</h1>
+      <p class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+        {post.data.tags && post.data.tags.length > 0 && (
+          <span class="tags"> · {post.data.tags.join(" · ")}</span>
+        )}
+      </p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .post {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+    box-sizing: border-box;
+  }
+
+  .post-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .post-meta {
+    opacity: 0.6;
+    font-size: 0.9rem;
+  }
+
+  .tags {
+    color: rgba(100, 220, 200, 0.9);
+  }
+
+  .prose {
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+
+  .prose :global(h2) {
+    text-align: left;
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .prose :global(h3) {
+    text-align: left;
+    margin: 2rem 0 0.75rem;
+  }
+
+  .prose :global(p) {
+    margin: 0 0 1.25rem;
+  }
+
+  .prose :global(a) {
+    color: rgba(100, 220, 200, 0.9);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.5rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .prose :global(li) {
+    margin: 0.4rem 0;
+  }
+
+  .prose :global(code) {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .prose :global(pre) {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid rgba(100, 220, 200, 0.4);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    opacity: 0.85;
+  }
+</style>
