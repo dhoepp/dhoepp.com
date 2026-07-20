@@ -8,13 +8,62 @@ const links = [
 ];
 ---
 
-<nav class="site-nav">
-  <ul>
+<nav class="site-nav" id="site-nav">
+  <button
+    class="hamburger-btn"
+    id="hamburger-btn"
+    type="button"
+    aria-expanded="false"
+    aria-controls="nav-menu"
+    aria-label="Open menu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul id="nav-menu" class="nav-links">
     {links.map((link) => (
       <li><a href={link.href}>{link.label}</a></li>
     ))}
   </ul>
 </nav>
+
+<script>
+  const nav = document.getElementById("site-nav")!;
+  const hamburgerBtn = document.getElementById("hamburger-btn")!;
+  const hero = document.getElementById("hero");
+
+  function closeMenu() {
+    nav.classList.remove("menu-open");
+    hamburgerBtn.setAttribute("aria-expanded", "false");
+  }
+
+  if (hero) {
+    nav.classList.add("compact");
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        nav.classList.toggle("compact", entry.isIntersecting);
+        if (!entry.isIntersecting) closeMenu();
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(hero);
+  }
+
+  hamburgerBtn.addEventListener("click", () => {
+    const open = nav.classList.toggle("menu-open");
+    hamburgerBtn.setAttribute("aria-expanded", String(open));
+  });
+
+  nav.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
+</script>
 
 <style>
   .site-nav {
@@ -30,21 +79,80 @@ const links = [
     background: rgba(34, 38, 38, 0.35);
   }
 
-  .site-nav ul {
+  .hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 22px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .hamburger-btn span {
+    display: block;
+    height: 2px;
+    background: #fff;
+    border-radius: 1px;
+    transition: background 0.2s ease;
+  }
+
+  .hamburger-btn:hover span {
+    background: rgba(100, 220, 200, 0.9);
+  }
+
+  .nav-links {
     display: flex;
     gap: 1.5rem;
     list-style: none;
     margin: 0;
     padding: 0;
     font-size: 0.9rem;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   .site-nav a:hover {
     color: rgba(100, 220, 200, 0.9);
   }
 
+  /* Compact (hero) state: hide the bar, show the hamburger */
+  .site-nav.compact {
+    justify-content: center;
+  }
+
+  .site-nav.compact .hamburger-btn {
+    display: flex;
+  }
+
+  .site-nav.compact .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    background: rgba(20, 24, 24, 0.9);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translate(-50%, -8px);
+    pointer-events: none;
+  }
+
+  .site-nav.compact.menu-open .nav-links {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+
   @media (max-width: 480px) {
-    .site-nav ul {
+    .nav-links {
       gap: 1rem;
       font-size: 0.8rem;
     }
