@@ -16,6 +16,7 @@ const posts = (
   snap={false}
 >
   <main class="writing-index">
+    <a href="/#projects" class="back-link">← Back</a>
     <h1>Writing</h1>
     {posts.length === 0 && <p class="empty">No posts yet.</p>}
     <div class="post-list">
@@ -28,12 +29,24 @@ const posts = (
   .writing-index {
     max-width: 760px;
     margin: 0 auto;
-    padding: 6rem 1.5rem 4rem;
+    padding: 3rem 1.5rem 4rem;
     box-sizing: border-box;
   }
 
   .writing-index h1 {
     margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .back-link:hover {
+    opacity: 1;
   }
 
   .post-list {

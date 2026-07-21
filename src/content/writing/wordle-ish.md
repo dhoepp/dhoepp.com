@@ -1,5 +1,5 @@
 ---
-title: "Leading Without Meaning To: What I Learned Reviewing Every PR on a Volunteer Dev Team"
+title: "Wordle-Ish: an open source wordle clone"
 description: "How a first-time Tier 3 Chingu voyage turned into a lesson on AI-assisted development, uneven team bandwidth, and quietly becoming the person everyone leaned on."
 pubDate: 2026-07-20
 tags: ["chingu", "team-leadership", "ai-assisted-development", "case-study"]

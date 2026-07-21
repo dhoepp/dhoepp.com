@@ -27,6 +27,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
   snap={false}
 >
   <article class="post">
+    <a href="/#projects" class="back-link">← Back</a>
     <header class="post-header">
       <h1>{post.data.title}</h1>
       <p class="post-meta">
@@ -46,12 +47,24 @@ const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
   .post {
     max-width: 720px;
     margin: 0 auto;
-    padding: 6rem 1.5rem 4rem;
+    padding: 3rem 1.5rem 4rem;
     box-sizing: border-box;
   }
 
   .post-header {
     margin-bottom: 2.5rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .back-link:hover {
+    opacity: 1;
   }
 
   .post-meta {
