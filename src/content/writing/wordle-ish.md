@@ -3,7 +3,7 @@ title: "Wordle-Ish: an open source wordle clone"
 description: "How a first-time Tier 3 Chingu voyage turned into a lesson on AI-assisted development, uneven team bandwidth, and quietly becoming the person everyone leaned on."
 pubDate: 2026-07-20
 tags: ["chingu", "team-leadership", "ai-assisted-development", "case-study"]
-draft: false
+draft: true
 ---
 
 I ended up reviewing almost every pull request on this project, merging most sprints myself, and getting pulled into the harder tickets whenever I missed a planning meeting. I didn't set out for any of that to happen. Here's how it did, and what I think it actually says about me.

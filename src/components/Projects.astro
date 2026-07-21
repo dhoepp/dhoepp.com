@@ -1,14 +1,32 @@
 ---
+import { getCollection } from "astro:content";
 import { projects } from "../data/projects";
 import ProjectCard from "../components/ProjectCard.astro";
 
-// Only use carousel if more than 2 projects (won't fit in one mobile screen)
-const needsCarousel = projects.length > 2;
+// A project's writeup link should only go live once its post is actually
+// published — otherwise the card would link to a draft page that doesn't
+// exist in a production build (404).
+const publishedSlugs = new Set(
+  (
+    await getCollection("writing", ({ data }) =>
+      import.meta.env.PROD ? data.draft !== true : true,
+    )
+  ).map((post) => post.id),
+);
 
-const pages: (typeof projects)[] = [];
+const visibleProjects = projects.map((project) => {
+  if (!project.writeup) return project;
+  const slug = project.writeup.replace(/^\/writing\//, "");
+  return publishedSlugs.has(slug) ? project : { ...project, writeup: undefined };
+});
+
+// Only use carousel if more than 2 projects (won't fit in one mobile screen)
+const needsCarousel = visibleProjects.length > 2;
+
+const pages: (typeof visibleProjects)[] = [];
 if (needsCarousel) {
-  for (let i = 0; i < projects.length; i += 2) {
-    pages.push(projects.slice(i, i + 2));
+  for (let i = 0; i < visibleProjects.length; i += 2) {
+    pages.push(visibleProjects.slice(i, i + 2));
   }
 }
 ---
@@ -18,7 +36,7 @@ if (needsCarousel) {
 
   {/* Desktop: flat grid (also used on mobile when <= 2 projects) */}
   <div class={`projects-grid desktop-grid ${needsCarousel ? "has-carousel" : ""}`}>
-    {projects.map((project) => <ProjectCard {...project} />)}
+    {visibleProjects.map((project) => <ProjectCard {...project} />)}
   </div>
 
   {/* Mobile: grouped into swipeable pages of 2 */}
