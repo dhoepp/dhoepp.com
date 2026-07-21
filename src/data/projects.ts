@@ -21,7 +21,14 @@ export const projects: Project[] = [
         github: "https://github.com/dhoepp/dhoepp.com",
         //demo: "https://dhoepp.com"
     },
-    
-    
+    {
+        title: "Wordle-ish",
+        description: "Wordle-style word game built with a volunteer Chingu Voyage 61 team, piloting AI-assisted development workflows",
+        tech: ["React", "Vite", "Supabase", "GitHub Actions"],
+        github: "https://github.com/chingu-voyages/V61-tier3-team-99",
+        demo: "https://wordle-ish.vercel.app"
+    },
+
+
   // add more projects
 ];

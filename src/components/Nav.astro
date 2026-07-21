@@ -9,9 +9,10 @@ const links = [
 
 const pathname = Astro.url.pathname;
 const isActive = (href: string) => href === "/writing" && pathname.startsWith("/writing");
+const isHome = pathname === "/";
 ---
 
-<nav class="site-nav" id="site-nav">
+<nav class:list={["site-nav", { compact: isHome }]} id="site-nav">
   <button
     class="hamburger-btn"
     id="hamburger-btn"
@@ -46,8 +47,6 @@ const isActive = (href: string) => href === "/writing" && pathname.startsWith("/
   }
 
   if (hero) {
-    nav.classList.add("compact");
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         nav.classList.toggle("compact", entry.isIntersecting);
@@ -125,9 +124,6 @@ const isActive = (href: string) => href === "/writing" && pathname.startsWith("/
     margin: 0;
     padding: 0;
     font-size: 0.9rem;
-    transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
   }
 
   .site-nav a:hover {
@@ -163,6 +159,9 @@ const isActive = (href: string) => href === "/writing" && pathname.startsWith("/
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   @media (max-width: 480px) {
