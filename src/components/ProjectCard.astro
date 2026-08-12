@@ -1,8 +1,11 @@
 ---
-const { title, description, tech, github, demo } = Astro.props;
+const { title, description, tech, github, demo, writeup } = Astro.props;
 ---
 
-<div class="project-card">
+<div class:list={["project-card", { "has-writeup": writeup }]}>
+  {writeup && (
+    <a href={writeup} class="stretched-link" aria-label={`Read the write-up for ${title}`}></a>
+  )}
   <h3>{title}</h3>
   <p>{description}</p>
   <p class="tech-stack">{tech.join(" • ")}</p>
@@ -14,6 +17,7 @@ const { title, description, tech, github, demo } = Astro.props;
 
 <style>
   .project-card {
+    position: relative;
     flex: 1 1 calc(33.333% - 1.5rem);
     min-width: 280px;
     max-width: 400px;
@@ -58,7 +62,29 @@ const { title, description, tech, github, demo } = Astro.props;
     margin-bottom: 1.25rem;
   }
 
+  .has-writeup {
+    cursor: pointer;
+  }
+
+  .has-writeup:hover {
+    border-color: rgba(210, 235, 230, 0.55);
+  }
+
+  .stretched-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  .stretched-link:focus-visible {
+    outline: 2px solid rgba(100, 220, 200, 0.7);
+    outline-offset: 2px;
+  }
+
   .card-links {
+    position: relative;
+    z-index: 2;
     display: flex;
     justify-content: center;
     gap: 1.5rem;
@@ -82,7 +108,7 @@ const { title, description, tech, github, demo } = Astro.props;
 
   @media (max-width: 768px) {
     .project-card {
-      flex: 1;
+      flex: 0 1 auto;
       min-width: unset;
       max-width: unset;
     }
