@@ -20,7 +20,9 @@ By the end, the GitHub history shows two of us (myself and a teammate) merged th
 
 When someone was behind on an assigned task, I'd message them directly rather than raise it in the group channel: asked if they were stuck, offered to help. Almost every time, the answer was some version of "busy with external obligations, but shipping tonight," and they did, and it got merged.
 
-What I didn't fully clock until the retro was how much this had shifted the team's center of gravity toward me. Teammates started routing bigger features to me by default: six-letter Infinity Mode, the Daily Puzzle mode, the leaderboard rework. The team more or less volunteered me as primary code reviewer and the person doing weekly merges. And if I missed a planning meeting, I'd often come back to find myself assigned the most complex ticket in the sprint, on the assumption I'd figure it out.
+What I didn't fully clock until the retro was how much this had shifted the team's center of gravity toward me. Teammates started routing bigger features to me by default. The team more or less volunteered me as primary code reviewer and the person doing weekly merges. And if I missed a planning meeting, I'd often come back to find myself assigned the most complex ticket in the sprint, on the assumption I'd figure it out.
+
+To be fair, I often pursued these complex features anyway as I enjoyed the challenge. And would often submit PRs for larger features during the week outside of the sprint plan when other tasks were completed. (eg. 6 letter mode, leaderboard rework, UI polish, discord app tie in.)
 
 ## Sitting with the imposter syndrome part
 
