@@ -1,10 +1,12 @@
 ---
-title: "Wordle-Ish: an open source wordle clone"
+title: "the imposter lead dev: least experienced on the team, first Tier 3 voyage"
 description: "A first-time Tier 3 Chingu voyage on AI-assisted development, uneven team bandwidth, and ending up as the de facto code reviewer and merge owner."
 pubDate: 2026-07-20
 tags: ["chingu", "team-leadership", "ai-assisted-development", "case-study"]
 draft: false
 ---
+
+This is the write-up for Wordle-Ish, a Chingu Voyage 61 project.
 
 I ended up reviewing almost every pull request on this project, merging most sprints myself, and getting pulled into the harder tickets whenever I missed a planning meeting. Here's how it happened.
 
