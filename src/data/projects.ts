@@ -30,6 +30,13 @@ export const projects: Project[] = [
         github: "https://github.com/dhoepp/dhoepp.com",
         //demo: "https://dhoepp.com"
     },
+    {
+        title: "Optimystik Massage",
+        description: "Landing page for a local massage therapy business, with contact and intake forms",
+        tech: ["Astro"],
+        github: "https://github.com/dhoepp/optimystik",
+        demo: "https://optimystikmassage.com"
+    },
 
 
   // add more projects
